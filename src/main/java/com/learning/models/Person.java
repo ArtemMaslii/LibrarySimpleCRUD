@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 public class Person {
 
-    private int id;
+    private int personId;
 
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 25, message = "Name should be between 2 and 25 characters")
@@ -18,18 +18,18 @@ public class Person {
     public Person() {
     }
 
-    public Person(int id, String fullName, int yearOfBirth) {
-        this.id = id;
+    public Person(int personId, String fullName, int yearOfBirth) {
+        this.personId = personId;
         this.fullName = fullName;
         this.yearOfBirth = yearOfBirth;
     }
 
-    public int getId() {
-        return id;
+    public int getPersonId() {
+        return personId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
     public String getFullName() {

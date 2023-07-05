@@ -22,13 +22,13 @@ public class PersonController {
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute(personDAO.index());
-        return "/people/index";
+        model.addAttribute("personList", personDAO.index());
+        return "people/index";
     }
 
-    @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute(personDAO.show(id));
+    @GetMapping("/{personId}")
+    public String show(@PathVariable("personId") int personId, Model model) {
+        model.addAttribute("person", personDAO.show(personId));
         return "/people/show";
     }
 }

@@ -21,13 +21,13 @@ public class BookController {
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute(bookDAO.index());
+        model.addAttribute("bookList", bookDAO.index());
         return "/books/index";
     }
 
-    @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute(bookDAO.show(id));
+    @GetMapping("/{bookId}")
+    public String show(@PathVariable("bookId") int bookId, Model model) {
+        model.addAttribute("book", bookDAO.show(bookId));
         return "/books/show";
     }
 
