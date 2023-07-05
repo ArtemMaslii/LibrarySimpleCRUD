@@ -11,10 +11,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.DriverManager;
 import java.util.Properties;
 
 @Configuration
