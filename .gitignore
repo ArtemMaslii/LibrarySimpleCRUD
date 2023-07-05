@@ -1,2 +1,4 @@
 #Database.properties
 /src/main/resources/database.properties
+#Target
+target/
