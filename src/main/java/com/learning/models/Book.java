@@ -6,9 +6,9 @@ import jakarta.validation.constraints.Size;
 
 public class Book {
 
-    private int book_id;
+    private int bookId;
 
-    private int owner_id;
+    private int ownerId;
 
     @NotEmpty
     @Size(min = 1, max = 100, message = "Book name should be between 1 and 100 characters")
@@ -19,33 +19,33 @@ public class Book {
     private String author;
 
     @Min(value = 1600, message = "Book can be acceptable if it's not older than 423 years")
-    private int year_of_publish;
+    private int yearOfPublish;
 
     public Book() {
     }
 
-    public Book(int book_id, int owner_id, String name, String author, int year_of_publish) {
-        this.book_id = book_id;
-        this.owner_id = owner_id;
+    public Book(int book_id, int owner_id, String name, String author, int yearOfPublish) {
+        this.bookId = book_id;
+        this.ownerId = owner_id;
         this.name = name;
         this.author = author;
-        this.year_of_publish = year_of_publish;
+        this.yearOfPublish = yearOfPublish;
     }
 
-    public int getBook_id() {
-        return book_id;
+    public int getBookId() {
+        return bookId;
     }
 
-    public void setBook_id(int book_id) {
-        this.book_id = book_id;
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 
-    public int getOwner_id() {
-        return owner_id;
+    public int getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner_id(int owner_id) {
-        this.owner_id = owner_id;
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getName() {
@@ -64,11 +64,11 @@ public class Book {
         this.author = author;
     }
 
-    public int getYear_of_publish() {
-        return year_of_publish;
+    public int getYearOfPublish() {
+        return yearOfPublish;
     }
 
-    public void setYear_of_publish(int year_of_publish) {
-        this.year_of_publish = year_of_publish;
+    public void setYearOfPublish(int yearOfPublish) {
+        this.yearOfPublish = yearOfPublish;
     }
 }
