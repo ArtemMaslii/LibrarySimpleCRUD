@@ -4,12 +4,14 @@ import jakarta.servlet.DispatcherType;
 import jakarta.servlet.FilterRegistration;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import java.util.EnumSet;
 
+@Component
 public class DespatcherInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
