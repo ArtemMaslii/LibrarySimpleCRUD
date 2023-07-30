@@ -31,8 +31,16 @@
 </div>
 <hr/>
 
-<form th:method="GET" th:action="@{/books/{bookId}/edit(bookId=${book.getBookId()})}">
-    <input type="submit" value="Edit">
-</form>
+`   <form th:method="GET" th:action="@{/books/{bookId}/edit(bookId=${book.getBookId()})}">
+        <input type="submit" value="Edit">
+    </form>
+
+    <form th:method="DELETE" th:action="@{/books/{bookId}(bookId=${book.getBookId()})}">
+        <input type="submit" value="Delete"/>
+    </form>
+
+    <form th:method="GET" th:action="@{/books}">
+        <input type="submit" value="Return to Library">
+    </form>
 </body>
 </html>
