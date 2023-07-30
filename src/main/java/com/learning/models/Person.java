@@ -5,15 +5,12 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 public class Person {
-
     private int personId;
-
-    @NotEmpty(message = "Name should not be empty")
+    private @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 25, message = "Name should be between 2 and 25 characters")
-    private String fullName;
-
-    @Min(value = 1900, message = "You should be not older than 123 years")
-    private int yearOfBirth;
+    String fullName;
+    private @Min(value = 1900L, message = "You should be not older than 123 years")
+    int yearOfBirth;
 
     public Person() {
     }
@@ -25,7 +22,7 @@ public class Person {
     }
 
     public int getPersonId() {
-        return personId;
+        return this.personId;
     }
 
     public void setPersonId(int personId) {
@@ -33,7 +30,7 @@ public class Person {
     }
 
     public String getFullName() {
-        return fullName;
+        return this.fullName;
     }
 
     public void setFullName(String fullName) {
@@ -41,7 +38,7 @@ public class Person {
     }
 
     public int getYearOfBirth() {
-        return yearOfBirth;
+        return this.yearOfBirth;
     }
 
     public void setYearOfBirth(int yearOfBirth) {
