@@ -4,6 +4,8 @@ import com.learning.models.Book;
 import com.learning.models.Person;
 import com.learning.repositories.BooksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +23,10 @@ public class BooksService {
         this.booksRepository = booksRepository;
     }
 
-    public List<Book> findAll() {
+    public List<Book> findAll(boolean sortByYear) {
+        if (sortByYear) {
+            return booksRepository.findAll(Sort.by("yearOfPublish"));
+        }
         return booksRepository.findAll();
     }
 
@@ -36,7 +41,11 @@ public class BooksService {
 
     @Transactional
     public void update(int bookId, Book newBook) {
+        Book book = booksRepository.findById(bookId).get();
+
         newBook.setBookId(bookId);
+        newBook.setOwner(book.getOwner());
+
         booksRepository.save(newBook);
     }
 
@@ -47,14 +56,33 @@ public class BooksService {
 
     @Transactional
     public void releaseBook(int bookId) {
-        Optional<Book> optionalBook = booksRepository.findById(bookId);
-        optionalBook.ifPresent(book -> book.setOwner(null));
+        booksRepository.findById(bookId).ifPresent(
+                book ->
+                    book.setOwner(null)
+        );
     }
 
     @Transactional
     public void assignBook(int bookId, Person owner) {
-        Optional<Book> optionalBook = booksRepository.findById(bookId);
-        optionalBook.ifPresent(book -> book.setOwner(owner));
+        booksRepository.findById(bookId).ifPresent(
+                book -> {
+                    book.setOwner(owner);
+                }
+        );
     }
 
+    public List<Book> findWithPagination(Integer page, Integer booksPerPage, boolean sortByYear) {
+        if (sortByYear) {
+            return booksRepository.findAll(PageRequest.of(page, booksPerPage)).getContent();
+        }
+        return booksRepository.findAll(PageRequest.of(page, booksPerPage, Sort.by("yearOfPublish"))).getContent();
+    }
+
+    public List<Book> search(String title) {
+        return booksRepository.findByTitleStartingWith(title);
+    }
+
+    public Person getBookOwner(int bookId) {
+        return booksRepository.findById(bookId).map(Book::getOwner).orElse(null);
+    }
 }
