@@ -1,4 +1,4 @@
 #Database.properties
-/src/main/resources/database.properties
+/src/main/resources/hibernate.properties
 #Target
 target/
