@@ -20,7 +20,8 @@
         <table th:each="book: ${books}">
             <tr>
                 <td>
-                    <span th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYearOfPublish()}">
+                    <span th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYearOfPublish()}"
+                    th:style="${book.isExpired()} ? 'color: red' : 'color: black'">
                         book
                     </span>
                 </td>
