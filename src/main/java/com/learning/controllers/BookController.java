@@ -5,7 +5,6 @@ import com.learning.models.Person;
 import com.learning.services.BooksService;
 import com.learning.services.PeopleService;
 import jakarta.validation.Valid;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,16 +31,23 @@ public class BookController {
     }
 
     @GetMapping
-    public String index(Model model) {
-        model.addAttribute("bookList", this.booksService.findAll());
+    public String index(Model model, @RequestParam(value = "page", required = false) Integer page,
+                        @RequestParam(value = "books_per_page", required = false) Integer booksPerPage,
+                        @RequestParam(value = "sort_by_year", required = false) boolean sortByYear) {
+        if (page == null && booksPerPage == null) {
+            model.addAttribute("bookList", this.booksService.findAll(sortByYear));
+        } else {
+            model.addAttribute("bookList", this.booksService.findWithPagination(page, booksPerPage, sortByYear));
+        }
+
         return "/books/index";
     }
 
     @GetMapping({"/{bookId}"})
     public String show(@PathVariable("bookId") int bookId, Model model) {
-        Book book = booksService.findById(bookId);
-        model.addAttribute("book", book);
-        Person owner = book.getOwner();
+        model.addAttribute("book", booksService.findById(bookId));
+        Person owner = booksService.getBookOwner(bookId);
+
         if (owner != null) {
             model.addAttribute("owner", owner);
         } else {
@@ -103,5 +109,16 @@ public class BookController {
             this.booksService.assignBook(bookId, customer);
             return "redirect:/books/" + bookId;
         }
+    }
+
+    @GetMapping("/search")
+    public String searchPage() {
+        return "books/search";
+    }
+
+    @PostMapping("/search")
+    public String makeSearch(Model model, @RequestParam("title") String title) {
+        model.addAttribute("books", booksService.search(title));
+        return "books/search";
     }
 }
