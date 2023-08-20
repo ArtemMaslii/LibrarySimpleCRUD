@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -65,9 +64,7 @@ public class BooksService {
     @Transactional
     public void assignBook(int bookId, Person owner) {
         booksRepository.findById(bookId).ifPresent(
-                book -> {
-                    book.setOwner(owner);
-                }
+                book -> book.setOwner(owner)
         );
     }
 
